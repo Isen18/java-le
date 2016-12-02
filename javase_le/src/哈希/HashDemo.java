@@ -55,6 +55,16 @@ public class HashDemo {
 		 * Key key2=new Key(1);
 		 * key1==key2 返回false，若作为Map的key,完全不符合我们的期望,因为我们会认为他们相等，应当重写equal和hashCode
 		 */
+		
+		People p1 = new People("Jack", 12);
+        System.out.println(p1.hashCode());
+ 
+        HashMap<People, Integer> hashMap = new HashMap<People, Integer>();
+        hashMap.put(p1, 1);
+ 
+        p1.setAge(13);
+ 
+        System.out.println(hashMap.get(p1));
 	}
 }
 class T1{
@@ -67,3 +77,43 @@ class T1{
 		return super.toString();
 	}
 }
+
+/**
+ * Effective Java:
+ * 在程序执行期间，只要equals方法的比较操作用到的信息没有被修改，那么对这同一个对象调用多次，hashCode方法必须始终如一地返回同一个整数。
+ * 如果两个对象根据equals方法比较是相等的，那么调用两个对象的hashCode方法必须返回相同的整数结果。
+ * 如果两个对象根据equals方法比较是不等的，则hashCode方法不一定得返回不同的整数。
+ * 
+ * Java编程思想:
+ * 设计hashCode()时最重要的因素就是：无论何时，对同一个对象调用hashCode()都应该产生同样的值。
+ * 如果在讲一个对象用put()添加进HashMap时产生一个hashCdoe值，而用get()取出时却产生了另一个hashCode值，那么就无法获取该对象了。
+ * 所以如果你的hashCode方法依赖于对象中易变的数据，用户就要当心了，因为此数据发生变化时，hashCode()方法就会生成一个不同的散列码。
+ * 在设计hashCode方法和equals方法的时候，如果对象中的数据易变，则最好在equals方法和hashCode方法中不要依赖于该字段。
+ */
+
+class People{
+    private String name;
+    private int age;
+ 
+    public People(String name,int age) {
+        this.name = name;
+        this.age = age;
+    }  
+ 
+    public void setAge(int age){
+        this.age = age;
+    }
+ 
+    @Override
+    public int hashCode() {
+        // TODO Auto-generated method stub
+        return name.hashCode()*37+age;
+    }
+ 
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        return this.name.equals(((People)obj).name) && this.age== ((People)obj).age;
+    }
+}
+ 
