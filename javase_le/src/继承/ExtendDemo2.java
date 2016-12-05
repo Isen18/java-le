@@ -87,25 +87,31 @@ public class ExtendDemo2 {
 		person.say();//等价于man.say(); Man: void say() and name = null age = 11
 		person.tell();//等价于Person.tell(); Person:static void tell() and age = 10
 		System.out.println(man.name);//Man
-		System.out.println(person.name);//等价于man.name; Man
+		System.out.println(person.name);//Man
+		System.out.println(man.name2);//Man : name2
+		System.out.println(person.name2);//Person : name2
 		System.out.println(man.age);//11
 		System.out.println(person.age);//等价于Person.age; 10
 		/**
 		 * 根据上述执行情况可以得出如下结论：
 		 * 
-		 * 在访问类的实例变量和实例方法时，会发生动态绑定，而在访问类的静态变量和静态方法，则不会发生动态绑定，相当于以类名访问这些静态成员。
+		 * 在访问类实例方法时，会发生动态绑定，而在访问类的静态变量和静态方法以及实例变量时，则不会发生动态绑定。
 		 * 
 		 * 当然了由于final方法是无法继承的，所以没有覆盖之说，覆盖和隐藏均要在能够继承的情况下才有意义。
 		 * 
-		 * 以实际类（子类）身份访问对象时，所有同名（跟父类同名，而不是子类中同名（方法重载））成员以实际类中定义的优先，实际类中没有同名的
+		 * 以实际类（子类）身份访问对象时，所有同名（跟父类同名，而不是子类中同名（方法重载））成员以实际类中定义的优先，实际类中没有同名的。
 		 * 
-		 * 以实际类（子类）的父类身份访问对象时，所有可访问的成员只能是已经在父类中定义的成员，并且对于对于与子类同名的实例成员（变量+方法）访问，发生动态绑定，访问的是子类实例成员
+		 * 以实际类（子类）的父类身份访问对象时，所有可访问的成员只能是已经在父类中定义的成员，并且对于对于与子类同名的实例方法访问，发生动态绑定，访问的是子类实例方法。
+		 * 
+		 * 覆盖：发生在父子类的同名、同参的实例方法中，隐藏发生在父子同名、同参的静态方法或者同名变量（静态+实例）中。
 		 */
 	}
 }
 
 class Person{
 	String name = getName();
+	
+	String name2 = "Person : name2";
 	
 	static int age = getAge();
 	
@@ -132,7 +138,8 @@ class Person{
 	
 	String getName(){
 		System.out.println("Person: String getName()");
-		return name;//其实此时name还没初始化，为null
+//		return name;//其实此时name还没初始化，为null
+		return "Person";
 	}
 	
 	static int getAge(){
@@ -149,6 +156,8 @@ class Man extends Person{
 	}
 	
 	String name = getName();
+	
+	String name2 = "Man : name2";
 	
 	static{
 		System.out.println("Man: static语句块");
@@ -179,3 +188,4 @@ class Man extends Person{
 		return 11;
 	}
 }
+
