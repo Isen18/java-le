@@ -1,53 +1,24 @@
 package 集合;
 
 import java.util.*;
-import java.util.concurrent.*;
-public class ArrayListDemo {
+
+/*
+ * @desc Vector遍历方式和效率的测试程序。
+ *
+ */
+public class VectorDemo {
 
     public static void main(String[] args) {
-//    	ArrayList<E>
-    	
-    	testAccessEfficiecy();
-    	
-//    	testCopy();
-    }
-    
-    private static void testAccessEfficiecy(){
-    	List list = new ArrayList();
+        Vector vec= new Vector();
         for (int i=0; i<100000; i++)
-            list.add(i);
-        isRandomAccessSupported(list);
-        iteratorThroughRandomAccess(list) ;
-        iteratorThroughIterator(list) ;
-        iteratorThroughFor2(list) ;
+            vec.add(i);
+        iteratorThroughRandomAccess(vec) ;
+        iteratorThroughIterator(vec) ;
+        iteratorThroughFor2(vec) ;
+        iteratorThroughEnumeration(vec) ;
+    
     }
-    
-    private static void testCopy(ArrayList<Integer> arrayList){
-    	copyFromArrayList1(arrayList);
-    	copyFromArrayList2(arrayList);
-    	copyFromArrayList3(arrayList);
-    }
-    
- // toArray(T[] contents)调用方式一
-	public static Integer[] copyFromArrayList1(ArrayList<Integer> arrayList) {
-	    Integer[] newText = new Integer[arrayList.size()];
-	    arrayList.toArray(newText);
-	    return newText;
-	}
 
-	// toArray(T[] contents)调用方式二。最常用！
-	public static Integer[] copyFromArrayList2(ArrayList<Integer> arrayList) {
-	    Integer[] newText = arrayList.toArray(new Integer[0]);
-	    return newText;
-	}
-
-	// toArray(T[] contents)调用方式三
-	public static Integer[] copyFromArrayList3(ArrayList<Integer> arrayList) {
-	    Integer[] newText = new Integer[arrayList.size()];
-	    Integer[] newStrings = arrayList.toArray(newText);
-	    return newStrings;
-	}
-    
     private static void isRandomAccessSupported(List list) {
         if (list instanceof RandomAccess) {
             System.out.println("RandomAccess implemented!");
@@ -94,5 +65,18 @@ public class ArrayListDemo {
         endTime = System.currentTimeMillis();
         long interval = endTime - startTime;
         System.out.println("iteratorThroughFor2：" + interval+" ms");
+    }
+
+    public static void iteratorThroughEnumeration(Vector vec) {
+
+        long startTime;
+        long endTime;
+        startTime = System.currentTimeMillis();
+        for(Enumeration enu = vec.elements(); enu.hasMoreElements(); ) {
+            enu.nextElement();
+        }
+        endTime = System.currentTimeMillis();
+        long interval = endTime - startTime;
+        System.out.println("iteratorThroughEnumeration：" + interval+" ms");
     }
 }
