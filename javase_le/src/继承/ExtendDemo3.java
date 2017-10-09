@@ -11,6 +11,8 @@ public class ExtendDemo3 {
 		System.out.println(animal.word);//Animal : Hello World
 		//final 对于属性而言是声明常量，对于方法而言是拒绝覆盖
 		cat.sleep(10);
+		cat.call();
+		
 	}
 	public static void main(String[] args,int a) {//main方法可以被重载
 		System.out.println("hleo");
@@ -22,11 +24,14 @@ class Animal{
 	final void cry(){
 		System.out.println("Animal : final void cry()");
 	}
-	static void laugh(){
+	static void laugh(){ 
 		System.out.println("Animal : static void laugh()");
 	}
 	void sleep(){
 		System.out.println("Animal : void sleep() : word = " + word);//此处word值永远是"Animal : Hello World"，即使是子类调用sleep
+	}
+	private void call(){
+		System.out.println("Animal : private void call()");
 	}
 }
 
@@ -41,6 +46,9 @@ class Cat extends Animal{
 	void sleep(int time) throws NullPointerException{//既不是覆盖也不是重载
 		System.out.println("Cat : void sleep(int time)");
 		sleep();//调用父类sleep(),并且父类sleep()中的word调用的是父类的word
+	}
+	void call(){
+		System.out.println("Cat : void call()");
 	}
 }
 

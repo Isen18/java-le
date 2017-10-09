@@ -199,7 +199,7 @@ enum Gender implements GenderInter{
     public String getName(){
         return this.name;
     }
-//    @Override
+    @Override
     public void info() {
     	System.out.println("枚举类统一实现方法");
     }

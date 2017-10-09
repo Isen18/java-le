@@ -29,6 +29,7 @@ import java.util.HashMap;
  */
 public class HashDemo {
 	public static void main(String[] args) {
+//		Object
 		T1 t1 = new T1();
 		T1 t12 = new T1();
 		System.out.println(t1==t12);//==用于比较对象是否是同一个对象。

@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
  
 	２）Unicode和UTF-8
 	测试结果如下，每个汉字转换为三个字节，且是可逆的，即通过字节可以转换回字符串
-	String－UTF-8〉ByteArray：/u0061/u4E2D/u6587（a中文）－〉0x61 0xE4 0xB8 0xAD 0xE6%0x96 0x87
+	String－UTF-8〉ByteArray：/u0061/u4E2D/u6587（a中文）－〉0x61 0xE4 0xB8 0xAD 0xE6 0x96 0x87
 	ByteArray－UTF-8〉String：0x61 0xE4 0xB8 0xAD 0xE6%0x96 0x87－〉/u0061/u4E2D/u6587（a中文）
 	
 	３）Unicode和ISO-8859-1
@@ -67,19 +67,23 @@ import java.io.UnsupportedEncodingException;
  */
 public class Demo {
 	public static void main(String[] args) {
-		String str="a中";//unicode
+		String str="a中文";//unicode utf-16
 		try {
-//			byte[] buff=str.getBytes("GBK");//gbk
-//			str = new String(buff,"UTF-8");
-//			buff = str.getBytes("UTF-8");
-//			str = new String(buff,"GBK");
-//			System.out.println(str);
-			
-			byte[] buff=str.getBytes("UTF-8");//gbk
-			str = new String(buff,"GBK");
-			buff = str.getBytes("GBK");
+			byte[] buff=str.getBytes("GBK");//gbk
+			System.out.println(buff.length);
 			str = new String(buff,"UTF-8");
+			buff = str.getBytes("UTF-8");
+			System.out.println(buff.length);
+			str = new String(buff,"GBK");
 			System.out.println(str);
+			
+			
+//			System.out.println(str.length());
+//			byte[] buff=str.getBytes("UTF-8");//gbk
+//			str = new String(buff,"GBK");
+//			buff = str.getBytes("GBK");
+//			str = new String(buff,"UTF-8");
+//			System.out.println(str);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

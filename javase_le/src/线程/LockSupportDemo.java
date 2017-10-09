@@ -25,6 +25,7 @@ import java.util.concurrent.locks.LockSupport;
 	 // 如果给定线程的许可尚不可用，则使其可用。
 	 static void unpark(Thread thread)
  */
+
 /**
  * 
  * <p>
@@ -32,6 +33,17 @@ import java.util.concurrent.locks.LockSupport;
  * </p>
  * <p>
  * Description: park和wait的区别。wait让线程阻塞前，必须通过synchronized获取同步锁。
+ * LockSupport 和 CAS一样是JUC很多控制机制的基础（但他们的底层其实都是在依赖Unsafe）
+ * 
+ * 函数中的blocker是一个和线程相关的对象，blocker用来做分析，debug用的
+ * 带有blocker的park是debug版本用于调试
+ * 
+ * block当前线程，是否真的block了取决于permit是否available
+ * permit相当于1,0的开关， 默认是0， 
+ * 调一次unpark，permit就变成1了,
+ * 调一次park会消费这个permit，permit有变成成0了（park立即返回）,
+ * 再次调用park会变成block（因为没有1可以拿了，会等在这，直到有1），这时调用unpark会把1给回去(线程解锁返回)
+ * 每个线程都有个相关的permit, permit最多一个,调用unpark多次也不会积累
  * </p>
  * 
  * @author zhang
@@ -94,7 +106,7 @@ public class LockSupportDemo {
 
 		System.out.println(Thread.currentThread().getName() + " block");
 		// 主线程阻塞
-		LockSupport.park(mainThread);
+		LockSupport.park(mainThread);//=LockSupport.park();
 //		LockSupport.park();
 
 		System.out.println(Thread.currentThread().getName() + " continue");

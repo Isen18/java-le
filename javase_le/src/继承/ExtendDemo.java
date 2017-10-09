@@ -3,8 +3,7 @@ public class ExtendDemo {
 	public static void main(String[] args) {
 //		new C().print();
 //		((P)new C()).print(); //等价于上一句
-//		((P)new C()).pr
-		((P)new C()).print4();
+//		((P)new C()).print4();
 	}
 }
 

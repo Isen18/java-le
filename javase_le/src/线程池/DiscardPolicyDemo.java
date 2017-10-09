@@ -1,4 +1,4 @@
-package 线程;
+package 线程池;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
