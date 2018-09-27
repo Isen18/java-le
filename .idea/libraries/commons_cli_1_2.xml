@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="commons-cli-1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/commons-cli-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/commons-lang3-3.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/fastjson-1.2.29.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/guava-19.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/javassist-3.20.0-GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/jna-4.2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/logback-classic-1.0.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/logback-core-1.0.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/netty-all-4.0.42.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/netty-tcnative-boringssl-static-1.1.33.Fork26.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/openmessaging-api-0.3.1-alpha.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-broker-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-client-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-common-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-example-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-filter-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-logging-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-namesrv-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-openmessaging-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-remoting-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-srvutil-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-store-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/rocketmq-tools-4.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/javase_le/lib/rocketmq/slf4j-api-1.7.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
