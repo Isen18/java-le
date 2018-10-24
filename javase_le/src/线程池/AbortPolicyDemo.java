@@ -51,8 +51,9 @@ class MyRunnable_3 implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(this.name + " is running.");
-            Thread.sleep(200);
+            System.out.println(Thread.currentThread().getName() + " name=" + this.name + " is running.");
+            Thread.sleep(2000);
+            System.out.println(this.name + " is finished.");
         } catch (Exception e) {
             e.printStackTrace();
         }

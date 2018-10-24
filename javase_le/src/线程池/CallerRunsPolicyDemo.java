@@ -34,6 +34,8 @@ public class CallerRunsPolicyDemo {
 
         // 关闭线程池
         pool.shutdown();
+
+        System.out.println("finished");
     }
 }
 
@@ -45,8 +47,8 @@ class MyRunnable_4 implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(this.name + " is running.");
-            Thread.sleep(100);
+            System.out.println(Thread.currentThread().getName() + " execute the task:" + this.name);
+            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -12,6 +12,8 @@ public class Client {
         UserManager userManagerJDK = (UserManager) jdkPrpxy    
                 .newProxy(new UserManagerImpl());    
         userManagerJDK.addUser("tom", "root");    
-    }    
+    }
+
+
 
 }
