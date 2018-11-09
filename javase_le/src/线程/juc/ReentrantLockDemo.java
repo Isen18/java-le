@@ -57,6 +57,45 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  */
 public class ReentrantLockDemo {
+
+    private static Lock lock = new ReentrantLock();
+
+    private static Condition condition = lock.newCondition();
+
+    public static void main(String[] args) {
+        new Thread(){
+            @Override
+            public void run() {
+                lock.lock();
+                try{
+                    System.out.println(currentThread().getName() + "同步于condition，等待其他线程唤醒");
+                    try {
+                        condition.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(currentThread().getName() + "被唤醒");
+                }finally {
+                    lock.unlock();
+                }
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                lock.lock();
+                System.out.println(currentThread().getName() + "唤醒同步于condition上的线程");
+                try{
+                    condition.signal();
+                }finally {
+                    lock.unlock();
+                }
+            }
+        }.start();
+    }
+
+
 	public static void lockTest() {  
         Depot mDepot = new Depot();
         Producer mPro = new Producer(mDepot);
@@ -79,10 +118,10 @@ public class ReentrantLockDemo {
 		mCus.consume(150);
 		mPro.produce(110);
 	}
-	public static void main(String[] args) {
-//		lockTest();
-		lockTest2();
-	}
+//	public static void main(String[] args) {
+////		lockTest();
+//		lockTest2();
+//	}
 }
 
 // 仓库

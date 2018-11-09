@@ -1,6 +1,9 @@
 package 序列化;
 
 import com.google.gson.Gson;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * @author Isen
@@ -10,6 +13,16 @@ import com.google.gson.Gson;
 public class Demo {
 
     public static void main(String[] args) {
+
+//        DateFormat dateFormat = new SimpleDateFormat();
+//        String string = dateFormat.format(null);
+//        System.out.println(string);
+        BigDecimal bigDecimal = BigDecimal.valueOf(1.55);
+        System.out.println(bigDecimal);
+        BigDecimal bigDecimal2 = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP);
+        System.out.println(bigDecimal);
+        System.out.println(bigDecimal2);
+
         Gson gson = new Gson();
         Man man = new Man(11, "张三");
         String jsonStr = gson.toJson(man);

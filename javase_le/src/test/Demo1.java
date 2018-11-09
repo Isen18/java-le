@@ -19,8 +19,10 @@ public class Demo1 {
 //		String daStr = sdf.format(date);
 //		System.out.println(daStr);
 
-		Integer a = 1 << 29;
-//		Integer a = -1;
-		System.out.printf(Integer.toBinaryString(a));
+//		Integer a = 1 << 29;
+////		Integer a = -1;
+//		System.out.printf(Integer.toBinaryString(a));
+
+		System.out.println(String.format("%s", null));
 	}
 }
