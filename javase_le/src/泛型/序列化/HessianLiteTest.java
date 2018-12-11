@@ -2,7 +2,7 @@ package 泛型.序列化;
 
 import com.alibaba.com.caucho.hessian.io.Hessian2Input;
 import com.alibaba.com.caucho.hessian.io.Hessian2Output;
-import com.google.common.collect.Maps;
+import java.util.HashMap;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -19,7 +19,7 @@ public class HessianLiteTest {
 
     @Test
     public void test() throws IOException {
-        Map<String, Byte> map = Maps.newHashMap();
+        Map<String, Byte> map = new HashMap<>();
         map.put("age", (byte) 18);
         byte[] bytes = serialize(map);
         Map<String, Byte> object = (Map<String, Byte>) deserialize(bytes);

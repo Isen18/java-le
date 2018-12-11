@@ -8,9 +8,9 @@ import java.util.concurrent.BlockingQueue;
  * @date 2018/11/16 10:12
  * @since 1.0
  */
-public class BlockingQueueExample {
+public class ArrayBlockingQueueExample {
     public static void main(String[] args) throws Exception {
-        
+        //容量不可更改
         BlockingQueue queue = new ArrayBlockingQueue(1024);
 
         Producer producer = new Producer(queue);
@@ -21,6 +21,4 @@ public class BlockingQueueExample {
 
         Thread.sleep(4000);
     }
-
-
 }

@@ -25,7 +25,7 @@ public class Base {
 //	ListIterator<E>
 //	HashSet<E>
 //	Vector<E>
-//	ConcurrentHashMap
+//	ConcurrentHashMapDemo
 //	LinkedHashMap<K, V>
 	
 //	void f(){

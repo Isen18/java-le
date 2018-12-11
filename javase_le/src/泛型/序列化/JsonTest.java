@@ -2,11 +2,11 @@ package 泛型.序列化;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class JsonTest {
     private static Gson gson = new Gson();
 
     public static void main(String[] args) throws IOException {
-        Map<String, List<Long>> map = Maps.newHashMap();
+        Map<String, List<Long>> map = new HashMap<>();
         map.put("one", Arrays.asList(10001L, 10002L, 10003L, 10004L));
         map.put("two", Arrays.asList(20001L, 20002L, 20003L, 20004L));
         map.put("three", Arrays.asList(30001L, 30002L, 30003L, 30004L));

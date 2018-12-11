@@ -1,5 +1,7 @@
 package 线程.juc.util.listset;
 
+import java.util.concurrent.CopyOnWriteArraySet;
+
 /**
  * @author Isen
  * @date 2018/11/18 15:58
@@ -7,4 +9,7 @@ package 线程.juc.util.listset;
  */
 public class CopyOnWriteArraySetDemo {
 
+    public static void main(String[] args) {
+        CopyOnWriteArraySet copyOnWriteArraySet = new CopyOnWriteArraySet();
+    }
 }
