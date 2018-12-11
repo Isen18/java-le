@@ -35,7 +35,7 @@ public class Demo {
 
     @Test
     public void testChannel() throws IOException {
-//        String path = Demo.class.getResource("/").toString();
+//        String path = SymmetricEncryption.class.getResource("/").toString();
 //        RandomAccessFile randomAccessFile = new RandomAccessFile(path + "data/nio-data.txt", "rw");
 //        RandomAccessFile randomAccessFile = new RandomAccessFile(FILE_PATH, "rw");
 //        FileChannel fileChannel = randomAccessFile.getChannel();

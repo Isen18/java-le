@@ -1,15 +1,13 @@
 package java8;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
 
 /**
- * Demo
+ * SymmetricEncryption
  *
  * @author Isen
  * @description
@@ -45,15 +43,15 @@ public class Demo {
 //            System.out.println(s);
 //        }
         Demo demo = new Demo();
-//        demo.fun(Demo::print);
+//        demo.fun(SymmetricEncryption::print);
 //        demo.fun(demo::print);
-//        demo.fun(Demo::print2);
+//        demo.fun(SymmetricEncryption::print2);
         demo.fun(demo::print2);
     }
 
     public static void main(String[] args) {
-//        Demo demo = new Demo();
-//        demo.fun(Demo::print2);
+//        SymmetricEncryption demo = new SymmetricEncryption();
+//        demo.fun(SymmetricEncryption::print2);
         List<Integer> result = Arrays.asList(1, 3, 3, 2, 1);
         result.sort((a, b) -> a.compareTo(b));
         System.out.println(result);

@@ -6,7 +6,7 @@ import java.lang.annotation.Repeatable;
 import org.junit.Test;
 
 /**
- * Demo
+ * SymmetricEncryption
  *
  * @author Isen
  * @description

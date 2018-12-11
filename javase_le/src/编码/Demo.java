@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * 
- *<p>Title: Demo</p>
+ *<p>Title: SymmetricEncryption</p>
  *<p>Description: 
  *１）将字符串用指定的编码集合解析成字节数组，完成Unicode－〉charsetName转换
 	public byte[] getBytes(String charsetName) throws UnsupportedEncodingException　

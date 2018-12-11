@@ -24,7 +24,7 @@ public class TimeDecoder extends ByteToMessageDecoder {
 
 //public class TimeDecoder extends ReplayingDecoder<Void> {
 //    @Override
-//    protected void decode(
+//    protected void decrypt(
 //            ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
 //        out.add(in.readBytes(4));
 //    }

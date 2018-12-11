@@ -9,7 +9,7 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 /**
- * Demo
+ * SymmetricEncryption
  *
  * @author Isen
  * @description

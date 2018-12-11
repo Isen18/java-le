@@ -7,7 +7,7 @@ import java.util.Set;
 import org.junit.Test;
 
 /**
- * Demo
+ * SymmetricEncryption
  *
  * @author Isen
  * @description
