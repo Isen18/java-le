@@ -2,13 +2,15 @@ package 序列化;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Isen
@@ -21,21 +23,37 @@ public class PerformTest {
 
     private static ObjectMapper mapper = new ObjectMapper();
 
-    public static void main(String[] args) throws JsonProcessingException{
-        //准备数据
-        List<Integer> ids = new ArrayList<>();
-        List<Student> students = new ArrayList<>();
-        List<School> schools = new ArrayList<>();
+    private static List<Integer> ids = new ArrayList<>();
+    private static List<Student> students = new ArrayList<>();
+    private static List<School> schools = new ArrayList<>();
 
-        Random random = new Random();
+    private static List<String> idsJSON = new ArrayList<>();
+    private static List<String> studentsJSON = new ArrayList<>();
+    private static List<String> schoolsJSON = new ArrayList<>();
 
-        for (int i = 0; i < 10000; i++) {
+    private static String idsStrJson;
+
+    private static int caseSize = 10000;
+    private static int caseNum = 100;
+    private static double caseNum2 = 100.;
+
+    public static void main(String[] args) throws IOException {
+        initData();
+
+        testObject2Json();
+
+        testJson2Object();
+    }
+
+    private static void initData(){
+        //准备数据object
+        for (int i = 0; i < caseSize; i++) {
             ids.add(i);
             Student student = new Student("stu" + i, 12, (byte) 1, "adress" + 1);
             students.add(student);
         }
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < caseSize; i++) {
             School school = new School("sch" + i, i,
                     Arrays.asList(
                             new Student("stu" + i, 12, (byte) 1, "adress" + 1),
@@ -44,42 +62,107 @@ public class PerformTest {
             schools.add(school);
         }
 
+
+        //准备数据json
+        ids.forEach(tmp -> idsJSON.add(PerformTest.gson.toJson(tmp)));
+        students.forEach(tmp -> studentsJSON.add(PerformTest.gson.toJson(tmp)));
+        schools.forEach(tmp -> schoolsJSON.add(PerformTest.gson.toJson(tmp)));
+
+        idsStrJson = gson.toJson(ids);
+    }
+
+    private static void testObject2Json()  throws JsonProcessingException{
         long gson = 0;
         long gson2 = 0;
         long gson3 = 0;
+        long gson4 = 0;
         long fastJson = 0;
         long fastJson2 = 0;
         long fastJson3 = 0;
+        long fastJson4 = 0;
         long jackson = 0;
         long jackson2 = 0;
         long jackson3 = 0;
+        long jackson4 = 0;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < caseNum; i++) {
             gson += testGson(ids);
             gson2 += testGson2(students);
             gson3 += testGson3(schools);
+            gson4 += testGson4(ids);
 
             fastJson += testFastJson(ids);
             fastJson2 += testFastJson2(students);
             fastJson3 += testFastJson3(schools);
+            fastJson4 += testFastJson4(ids);
 
             jackson += testJackson(ids);
             jackson2 += testJackson2(students);
             jackson3 += testJackson3(schools);
+            jackson4 += testJackson4(ids);
 
         }
 
         System.out.println("object -> json 耗时");
-        System.out.println("gson=" + gson);
-        System.out.println("gson2=" + gson2);
-        System.out.println("gson3=" + gson3);
-        System.out.println("fastJson=" + fastJson);
-        System.out.println("fastJson2=" + fastJson2);
-        System.out.println("fastJson3=" + fastJson3);
-        System.out.println("jackson=" + jackson);
-        System.out.println("jackson2=" + jackson2);
-        System.out.println("jackson3=" + jackson3);
+        System.out.println("gson=" + gson / caseNum2);
+        System.out.println("gson2=" + gson2 / caseNum2);
+        System.out.println("gson3=" + gson3 / caseNum2);
+        System.out.println("gson4=" + gson4 / caseNum2);
+        System.out.println("fastJson=" + fastJson/ caseNum2);
+        System.out.println("fastJson2=" + fastJson2/ caseNum2);
+        System.out.println("fastJson3=" + fastJson3/ caseNum2);
+        System.out.println("fastJson4=" + fastJson4/ caseNum2);
+        System.out.println("jackson=" + jackson/ caseNum2);
+        System.out.println("jackson2=" + jackson2/ caseNum2);
+        System.out.println("jackson3=" + jackson3/ caseNum2);
+        System.out.println("jackson4=" + jackson4/ caseNum2);
+    }
 
+    private static void testJson2Object()  throws IOException{
+        long gson = 0;
+        long gson2 = 0;
+        long gson3 = 0;
+        long gson4 = 0;
+        long fastJson = 0;
+        long fastJson2 = 0;
+        long fastJson3 = 0;
+        long fastJson4 = 0;
+        long jackson = 0;
+        long jackson2 = 0;
+        long jackson3 = 0;
+        long jackson4 = 0;
+
+        for (int i = 0; i < caseNum; i++) {
+            gson += testGsonJSON2Object(idsJSON);
+            gson2 += testGsonJSON2Object2(studentsJSON);
+            gson3 += testGsonJSON2Object3(schoolsJSON);
+            gson4 += testGsonJSON2Object4(idsStrJson);
+
+            fastJson += testFastJsonJSON2Object(idsJSON);
+            fastJson2 += testFastJsonJSON2Object2(studentsJSON);
+            fastJson3 += testFastJsonJSON2Object3(schoolsJSON);
+            fastJson4 += testFastJsonJSON2Object4(idsStrJson);
+
+            jackson += testJacksonJSON2Object(idsJSON);
+            jackson2 += testJacksonJSON2Object2(studentsJSON);
+            jackson3 += testJacksonJSON2Object3(schoolsJSON);
+            jackson4 += testJacksonJSON2Object4(idsStrJson);
+
+        }
+
+        System.out.println("object -> json 耗时");
+        System.out.println("gson=" + gson / caseNum2);
+        System.out.println("gson2=" + gson2 / caseNum2);
+        System.out.println("gson3=" + gson3 / caseNum2);
+        System.out.println("gson4=" + gson4 / caseNum2);
+        System.out.println("fastJson=" + fastJson/ caseNum2);
+        System.out.println("fastJson2=" + fastJson2/ caseNum2);
+        System.out.println("fastJson3=" + fastJson3/ caseNum2);
+        System.out.println("fastJson4=" + fastJson4/ caseNum2);
+        System.out.println("jackson=" + jackson/ caseNum2);
+        System.out.println("jackson2=" + jackson2/ caseNum2);
+        System.out.println("jackson3=" + jackson3/ caseNum2);
+        System.out.println("jackson4=" + jackson4/ caseNum2);
     }
 
     //gson
@@ -107,6 +190,14 @@ public class PerformTest {
         return System.currentTimeMillis() - start;
     }
 
+    private static long testGson4(List<Integer> ids){
+        long start = System.currentTimeMillis();
+
+        gson.toJson(ids);
+
+        return System.currentTimeMillis() - start;
+    }
+
     //fastjson
     private static long testFastJson(List<Integer> ids){
         long start = System.currentTimeMillis();
@@ -126,6 +217,13 @@ public class PerformTest {
         long start = System.currentTimeMillis();
 
         schools.forEach(tmp -> JSON.toJSONString(tmp));
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testFastJson4(List<Integer> ids){
+        long start = System.currentTimeMillis();
+
+        JSON.toJSONString(ids);
 
         return System.currentTimeMillis() - start;
     }
@@ -158,6 +256,114 @@ public class PerformTest {
 
         return System.currentTimeMillis() - start;
     }
+    private static long testJackson4(List<Integer> ids) throws JsonProcessingException{
+        long start = System.currentTimeMillis();
+
+        mapper.writeValueAsString(ids);
+
+        return System.currentTimeMillis() - start;
+    }
+
+
+    //json->object
+    //gson
+    private static long testGsonJSON2Object(List<String> ids){
+        long start = System.currentTimeMillis();
+
+        ids.forEach(tmp -> gson.fromJson(tmp, Integer.class));
+
+        return System.currentTimeMillis() - start;
+    }
+
+    private static long testGsonJSON2Object2(List<String> students){
+        long start = System.currentTimeMillis();
+
+        students.forEach(tmp -> gson.fromJson(tmp, Student.class));
+
+        return System.currentTimeMillis() - start;
+    }
+
+    private static long testGsonJSON2Object3(List<String> schools){
+        long start = System.currentTimeMillis();
+
+        schools.forEach(tmp -> gson.fromJson(tmp, School.class));
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testGsonJSON2Object4(String ids){
+        long start = System.currentTimeMillis();
+
+        gson.fromJson(ids, new TypeToken<List<Integer>>(){}.getType());
+
+        return System.currentTimeMillis() - start;
+    }
+
+    //fastjson
+    private static long testFastJsonJSON2Object(List<String> ids){
+        long start = System.currentTimeMillis();
+
+        ids.forEach(tmp -> JSON.parseObject(tmp, Integer.class));
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testFastJsonJSON2Object2(List<String> students){
+        long start = System.currentTimeMillis();
+
+        students.forEach(tmp -> JSON.parseObject(tmp, Student.class));
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testFastJsonJSON2Object3(List<String> schools){
+        long start = System.currentTimeMillis();
+
+        schools.forEach(tmp -> JSON.parseObject(tmp, School.class));
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testFastJsonJSON2Object4(String ids){
+        long start = System.currentTimeMillis();
+
+        JSON.parseArray(ids, Integer.class);
+
+        return System.currentTimeMillis() - start;
+    }
+
+    //jackson
+    private static long testJacksonJSON2Object(List<String> ids) throws IOException {
+        long start = System.currentTimeMillis();
+
+        for (String tmp : ids){
+            mapper.readValue(tmp, Integer.class);
+        }
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testJacksonJSON2Object2(List<String> students) throws IOException{
+        long start = System.currentTimeMillis();
+
+        for (String tmp : students){
+            mapper.readValue(tmp, Student.class);
+        }
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testJacksonJSON2Object3(List<String> schools) throws IOException{
+        long start = System.currentTimeMillis();
+
+        for (String tmp : schools){
+            mapper.readValue(tmp, School.class);
+        }
+
+        return System.currentTimeMillis() - start;
+    }
+    private static long testJacksonJSON2Object4(String ids) throws IOException{
+        long start = System.currentTimeMillis();
+
+        mapper.readValue(ids, new TypeReference<List<Integer>>(){});
+
+        return System.currentTimeMillis() - start;
+    }
+
 }
 
 //简单pojo
