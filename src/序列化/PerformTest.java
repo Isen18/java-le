@@ -46,27 +46,24 @@ public class PerformTest {
     }
 
     private static void initData(){
-        //准备数据object
         for (int i = 0; i < caseSize; i++) {
+            //准备数据object
             ids.add(i);
             Student student = new Student("stu" + i, 12, (byte) 1, "adress" + 1);
             students.add(student);
-        }
 
-        for (int i = 0; i < caseSize; i++) {
             School school = new School("sch" + i, i,
                     Arrays.asList(
                             new Student("stu" + i, 12, (byte) 1, "adress" + 1),
                             new Student("stu" + i, 12, (byte) 1, "adress" + 1),
                             new Student("stu" + i, 12, (byte) 1, "adress" + 1)));
             schools.add(school);
+
+            //准备数据json
+            idsJSON.add(PerformTest.gson.toJson(i));
+            studentsJSON.add(PerformTest.gson.toJson(student));
+            schoolsJSON.add(PerformTest.gson.toJson(school));
         }
-
-
-        //准备数据json
-        ids.forEach(tmp -> idsJSON.add(PerformTest.gson.toJson(tmp)));
-        students.forEach(tmp -> studentsJSON.add(PerformTest.gson.toJson(tmp)));
-        schools.forEach(tmp -> schoolsJSON.add(PerformTest.gson.toJson(tmp)));
 
         idsStrJson = gson.toJson(ids);
     }
