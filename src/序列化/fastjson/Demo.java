@@ -15,14 +15,16 @@ import java.util.Map;
 public class Demo {
 
     public static void main(String[] args) {
-        Map<String, String> map = new HashMap<>();
-        map.put("name", "张三");
-        T t = new T();
-        t.setA(12);
-        t.setIds(Arrays.asList(12, 18));
-//        t.setMap(map);
-
-        System.out.println(JSON.toJSONString(t));
+//        Map<String, String> map = new HashMap<>();
+//        map.put("name", "张三");
+//        T t = new T();
+//        t.setA(12);
+//        t.setIds(Arrays.asList(12, 18));
+////        t.setMap(map);
+//
+//        System.out.println(JSON.toJSONString(t));
+       ;
+        System.out.println(JSON.toJSONString( Arrays.asList(12, 12)));
     }
 }
 
