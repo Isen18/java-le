@@ -1,4 +1,4 @@
-package java8;
+package java8.datetime;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 import org.junit.Test;
 
 /**
- * java8.DateTimeDemo
+ * java8.datetime.DateTimeDemo
  *
  * @author Isen
  * @description
