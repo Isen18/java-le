@@ -1,5 +1,7 @@
 package 设计模式.singleton;
 
+import java.io.Serializable;
+
 /**
  * 懒汉模式(增强)
  *
@@ -7,7 +9,9 @@ package 设计模式.singleton;
  * @date 2018/12/21 11:12
  * @since 1.0
  */
-public class Singleton3 {
+public class Singleton3 implements Serializable {
+
+    private static final long serialVersionUID = 1315626722154876527L;
 
     /**
      * 私有化构造函数，防止被实例化(无法完全防止)
