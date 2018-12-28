@@ -1,37 +1,67 @@
 package jdk和cglib代理;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
 
 /**
- * JDK动态代理类
+ * JDK动态代理，只能为接口或者实现接口的类进行代理
  */
 public class JDKProxy implements InvocationHandler {
 
-    /**
-     * 需要代理的目标对象
-     */
     private Object targetObject;
 
     /**
-     * 为目标对象生成代理对象
+     * 为接口生成代理对象
+     * @param inter 被代理的接口
+     * @return 代理对象
      */
-    public Object newProxy(Object targetObject) {
-        this.targetObject = targetObject;
-        //返回代理对象
-        return Proxy.newProxyInstance(targetObject.getClass().getClassLoader(), targetObject.getClass().getInterfaces(), this);
-    }    
-    
+    @SuppressWarnings("unchecked")
+    public <T> T newProxy(Class<T> inter) {
+        if(!Modifier.isInterface(inter.getModifiers())){
+            throw new IllegalArgumentException(String.format("inter=%s 不是接口", inter.getName()));
+        }
+        //类加载器+接口+代理类
+        return (T)Proxy.newProxyInstance(inter.getClassLoader(), new Class<?>[]{inter}, this);
+    }
+
+    /**
+     * 为接口实现类生成代理对象
+     * @param object 被代理的对象
+     * @return 代理对象
+     */
+    public Object newProxy(Object object){
+        Class<?> clazz = object.getClass();
+        if(clazz.getInterfaces().length == 0){
+            throw new IllegalArgumentException(String.format("object.getClass=%s 没有 implements 接口", clazz.getName()));
+        }
+
+        targetObject = object;
+
+        //类加载器+接口+代理类
+        return Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), this);
+    }
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
-            throws Throwable {
-        //模拟检查权限
-        checkPopedom();
-        return method.invoke(targetObject, args);
-    }    
-    
-    private void checkPopedom() {
-        System.out.println("检查权限  checkPopedom()!");
-    }    
-}    
+            throws InvocationTargetException, IllegalAccessException {
+        if(targetObject != null){
+            //代理接口实现类
+            System.out.println("调用被代理对象的方法开始");
+            Object result = method.invoke(targetObject, args);
+            System.out.println("调用被代理对象的方法结束");
+            return result;
+        }else {
+            //代理接口
+            System.out.println("接口方法调用开始");
+            System.out.println("此处编写接口的实现代码");
+            System.out.println("method toGenericString:" + method.toGenericString());
+            System.out.println("method name:" + method.getName());
+            System.out.println("method args:" + args.length);
+            System.out.println("接口方法调用结束");
+            return "方法调用结果";
+        }
+    }
+}
