@@ -1,5 +1,7 @@
 package 设计模式.singleton;
 
+import java.io.Serializable;
+
 /**
  * 枚举实现单例
  *
@@ -7,14 +9,7 @@ package 设计模式.singleton;
  * @date 2018/12/21 11:12
  * @since 1.0
  */
-public enum Singleton4 {
+public enum Singleton4 implements Serializable {
 
-    INSTANCE;
-
-    /**
-     * 如果该对象被用于序列化，可以保证对象在序列化前后保持一致
-     */
-    public Object readResolve() {
-        return INSTANCE;
-    }
+    INSTANCE
 }
