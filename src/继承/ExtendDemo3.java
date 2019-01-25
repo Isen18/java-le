@@ -44,7 +44,7 @@ class Cat extends Animal{
 //		System.out.println("Cat : static void laugh()");
 //	}
 	void sleep(int time) throws NullPointerException{//既不是覆盖也不是重载
-		System.out.println("Cat : void sleep(int time)");
+		System.out.println("Cat : void sleep(int time) word=" + word);
 		sleep();//调用父类sleep(),并且父类sleep()中的word调用的是父类的word
 	}
 	void call(){

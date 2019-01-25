@@ -6,6 +6,7 @@ class Base{
 	}
 	
 	public Number fun2() {
+		fun();
 		return 0;
 	}
 }
@@ -15,9 +16,9 @@ class SubBase extends Base{
 		System.out.println("SubBase : public void fun()");
 	}
 	
-	public Integer fun2() {
-		return 1;
-	}
+//	public Integer fun2() {
+//		return 1;
+//	}
 }
 
 interface in{
@@ -63,7 +64,7 @@ class cl{
 public class ExtendDemo4 {
 	public static void main(String[] args) {
 		Base base = new SubBase();
-//		base
+
 		System.out.println(base.fun2());
 	}
 }
