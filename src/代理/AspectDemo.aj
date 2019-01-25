@@ -1,4 +1,4 @@
-package jdk和cglib代理;
+package 代理;
 
 /**
  * 语法：

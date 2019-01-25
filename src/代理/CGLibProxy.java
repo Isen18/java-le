@@ -1,4 +1,4 @@
-package jdk和cglib代理;
+package 代理;
 
 import java.lang.reflect.Method;
 import net.sf.cglib.proxy.Enhancer;

@@ -1,4 +1,4 @@
-package jdk和cglib代理;
+package 代理;
 
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class Client {
     @Test
     public void testJdkProxy(){
         //代理接口测试
-        UserManager userManager = new JDKProxy().newProxy(UserManager.class);
+       UserManager userManager = new JDKProxy().newProxy(UserManager.class);
         userManager.addUser("1", "123");
         userManager.delUser("1");
 
