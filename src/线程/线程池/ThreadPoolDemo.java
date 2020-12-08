@@ -20,7 +20,7 @@ public class ThreadPoolDemo {
 	
     public static void main(String[] args) {
         // 创建一个可重用固定线程数的线程池
-        ExecutorService pool = Executors.newFixedThreadPool(2);
+        ExecutorService pool = Executors.newFixedThreadPool(1);
         Executors.newSingleThreadExecutor();
         Executors.newCachedThreadPool();
         Executors.newScheduledThreadPool(1);
@@ -35,11 +35,14 @@ public class ThreadPoolDemo {
         pool.execute(tb);
         pool.execute(tc);
         pool.execute(td);
-        pool.execute(te);
         // 关闭线程池
         pool.shutdown();
-        List<Runnable> runnables =  pool.shutdownNow();
-        System.out.println(runnables);
+        System.out.println("shutdown");
+        pool.shutdownNow();
+        System.out.println("shutdownNow");
+        pool.execute(te);
+//        List<Runnable> runnables =  pool.shutdownNow();
+//        System.out.println(runnables);
     }
 }
 
@@ -47,14 +50,16 @@ class MyThread_2 extends Thread {
 
     @Override
     public void run() {
+        System.out.println(Thread.currentThread().getName()+ " start.");
     	try {
-            int r = new Random().nextInt(5) + 1;
-			sleep(1000 * r);
-			System.out.println("r=" + r);
+//            int r = new Random().nextInt(5) + 1;
+//			sleep(1000 * r);
+//			System.out.println("r=" + r);
+            sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println(Thread.currentThread().getName()+ " is running.");
+        System.out.println(Thread.currentThread().getName()+ " end.");
     }
 }

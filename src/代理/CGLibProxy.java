@@ -41,6 +41,13 @@ public class CGLibProxy implements MethodInterceptor {
         return enhancer.create();
     }
 
+    /**
+     * @param proxy 要进行增强的对象
+     * @param method 拦截的方法
+     * @param args 参数列表
+     * @param methodProxy 表示对方法的代理 invokeSuper方法表示对被代理对象方法的调用
+     * @throws Throwable
+     */
     @Override
     public Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
         if(targetObject != null){

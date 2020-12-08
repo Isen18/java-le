@@ -26,12 +26,18 @@ public class AbortPolicyDemo {
         ThreadPoolExecutor pool = new ThreadPoolExecutor(THREADS_SIZE, THREADS_SIZE, 0, TimeUnit.SECONDS,
                 new ArrayBlockingQueue<Runnable>(CAPACITY));
         // 设置线程池的拒绝策略为"抛出异常"
-        pool.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
+//        pool.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
+        // 设置线程池的拒绝策略为"丢弃"
+//        pool.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
+        // 设置线程池的拒绝策略为"DiscardOldestPolicy"
+        //pool.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardOldestPolicy());
+        // 设置线程池的拒绝策略为"CallerRunsPolicy"
+        pool.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
 
         try {
 
             // 新建10个任务，并将它们添加到线程池中。
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 Runnable myrun = new MyRunnable_3("task-"+i);
                 pool.execute(myrun);
             }

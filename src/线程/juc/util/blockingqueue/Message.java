@@ -45,10 +45,16 @@ public class Message implements Delayed {
 
     @Override
     public int compareTo(Delayed delayed) {
-        //到期的消息排序
         Message msg = (Message) delayed;
-        return Integer.valueOf(this.id) > Integer.valueOf(msg.id) ? 1
-                : (Integer.valueOf(this.id) < Integer.valueOf(msg.id) ? -1 : 0);
+        if(executeTime > msg.executeTime){
+            return 1;
+        }
+
+        if(executeTime < msg.executeTime){
+            return -1;
+        }
+
+        return 0;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package 线程.juc;
 
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.AbstractOwnableSynchronizer;
 import java.util.concurrent.locks.AbstractQueuedLongSynchronizer;
@@ -33,4 +36,7 @@ public class Demo {
     CyclicBarrier cyclicBarrier;
     Semaphore semaphore;
     ReadLock readLock;
+    DelayQueue delayQueue;
+    ConcurrentHashMap concurrentHashMap;
+    HashMap hashMap;
 }

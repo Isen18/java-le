@@ -36,6 +36,10 @@ public class Base {
 	public static void main(String[] args) {
 		LinkedHashMap<Integer, Integer> list = new LinkedHashMap<Integer, Integer>();
 //		list.
+//		HashSet;
+		LinkedHashMap linkedHashMap;
+//		linkedHashMap.put(, );
+//		Collections.synchronizedMap();
 	}
 	
 }
